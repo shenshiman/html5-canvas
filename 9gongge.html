@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>九宫格游戏</title>
+	<style>
+	body{background:#ddd;
+		 width:100%;
+		 position:relative;
+	}
+	canvas{background:#fff;}
+	#c1{
+		position: absolute;
+		left:50%;
+		margin-left:-400px;
+	}
+	</style>
+	
+	
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+<script>
+	window.onload = function(){
+		var canvas = document.getElementById('c1');
+		var ctx = canvas.getContext('2d');
+		var pos;
+		var posEnd;
+		//初始化 布局
+		for(var i=0;i<3;i++){
+			ctx.beginPath();
+			ctx.strokeRect(0+(i*100),0,100,100);
+
+			for(var j=0;j<3;j++){
+				ctx.beginPath();
+				ctx.strokeRect(0+(i*100),0+(j*100),100,100);
+				ctx.closePath();
+			};
+			ctx.closePath();
+		};
+		//var bg = new Image();
+		//bg.src = "hero1.png";
+		(function randomNum(){   //生成随机坐标
+			pos = {
+				x:Math.floor(Math.random()*3),
+				y:Math.floor(Math.random()*3)
+			};
+			posEnd = {
+				x: Math.floor(Math.random()*3),
+				y: Math.floor(Math.random()*3)
+			};
+			if((pos.x==posEnd.x) && (pos.y==posEnd.y)){
+				randomNum();
+				console.log("=")
+			};
+		})();
+		
+		switch(pos.x){
+			case 0:
+				pos.x = 50;
+				break;
+			case 1:
+				pos.x = 150;
+				break;
+			case 2:
+				pos.x = 250;
+				break;
+			case 3:
+				pos.x = 350;
+				break;
+		};
+		switch(pos.y){
+			case 0:
+				pos.y = 50;
+				break;
+			case 1:
+				pos.y = 150;
+				break;
+			case 2:
+				pos.y = 250;
+				break;
+			case 3:
+				pos.y = 350;
+				break;
+		};
+		switch(posEnd.x){
+			case 0:
+				posEnd.x = 50;
+				break;
+			case 1:
+				posEnd.x = 150;
+				break;
+			case 2:
+				posEnd.x = 250;
+				break;
+			case 3:
+				posEnd.x = 350;
+				break;
+		};
+		switch(posEnd.y){
+			case 0:
+				posEnd.y = 50;
+				break;
+			case 1:
+				posEnd.y = 150;
+				break;
+			case 2:
+				posEnd.y = 250;
+				break;
+			case 3:
+				posEnd.y = 350;
+				break;
+		};
+		
+		//ctx.drawImage(bg,pos.x,pos.y);
+		ctx.fillStyle = "#f60";
+		ctx.arc(pos.x,pos.y,20,0,2*Math.PI,true);
+		ctx.fill();
+		//alert(pos.x+","+pos.y+"||"+posEnd.x+","+posEnd.y);
+
+		if((pos.x!=posEnd.x)||(pos.y!=posEnd.y)){  //斜线
+			var sport = setInterval(function(){
+				if(posEnd.x-pos.x>0){
+					pos.x++;
+					draw();
+				}else if(posEnd.x-pos.x<0){
+					pos.x--;
+					draw();
+				};
+				ctx.arc(pos.x,pos.y,20,0,2*Math.PI,true);
+				ctx.fill();
+				if(pos.x==posEnd.x){
+					if(posEnd.y-pos.y>0){
+						pos.y++;
+						draw();
+					}else if(posEnd.y-pos.y<0){
+						pos.y--;
+						draw();
+					};
+					ctx.arc(pos.x,pos.y,20,0,2*Math.PI,true);
+					ctx.fill();
+					if(pos.y==posEnd.y){
+						clearInterval(sport);
+					};
+				};				
+			},30);
+		}else{
+			var sport = setInterval(function(){
+				if(posEnd.x-pos.x>0){
+					pos.x++;
+					draw();
+				}else if(posEnd.x-pos.x<0){
+					pos.x--;
+					draw();
+				};
+				if(posEnd.y-pos.y>0){
+					pos.y++;
+					draw();
+				}else if(posEnd.y-pos.y<0){
+					pos.y--;
+					draw();
+				};
+				//ctx.drawImage(bg,pos.x,pos.y);
+				ctx.arc(pos.x,pos.y,20,0,2*Math.PI,true);
+				ctx.fill();
+
+				if(pos.x==posEnd.x&&pos.y==posEnd.y){
+					clearInterval(sport);
+				}				
+			},30);
+		};
+		function draw(){   //布局重绘
+			ctx.clearRect(pos.x-30,pos.y-30,60,60);
+			for(var i=0;i<3;i++){
+				ctx.beginPath();
+				ctx.strokeRect(0+(i*100),0,100,100);
+				for(var j=0;j<3;j++){
+					ctx.beginPath();
+
+					ctx.strokeRect(0+(i*100),0+(j*100),100,100);
+					ctx.closePath();
+				};
+				ctx.closePath();
+			};
+		};
+	};
+	</script>
+</html>
