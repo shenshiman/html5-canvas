@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>距离倒计时</title>
+	<style>
+		div
+{
+width:100px;
+height:100px;
+text-align: center;
+line-height: 100px;
+color:#fff;
+border-radius: 50%;
+background:red;
+position:relative;
+animation:myfirst 5s;
+-moz-animation:myfirst 5s; /* Firefox */
+-webkit-animation:myfirst 5s; /* Safari and Chrome */
+-o-animation:myfirst 5s; /* Opera */
+}
+
+@keyframes myfirst
+{
+0%   {background:red; left:0px; top:0px;}
+15%  {background:yellow; left:200px; top:200px;}
+30%  {background:blue; left:400px; top:0px;}
+45%  {background:green; left:600px; top:200px;}
+60% {background:red; left:800px; top:0px;}
+75% {background:red; left:1000px; top:200px;}
+90% {background:red; left:1200px; top:0px;}
+100% {background:red; left:1400px; top:200px;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:200px; top:0px;}
+50%  {background:blue; left:200px; top:200px;}
+75%  {background:green; left:0px; top:200px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:200px; top:0px;}
+50%  {background:blue; left:200px; top:200px;}
+75%  {background:green; left:0px; top:200px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:200px; top:0px;}
+50%  {background:blue; left:200px; top:200px;}
+75%  {background:green; left:0px; top:200px;}
+100% {background:red; left:0px; top:0px;}
+}
+	</style>
+</head>
+<body>
+	<div>国庆倒计时</div>
+	<canvas id="canvas" style="display:block;margin:50px auto;"></canvas>
+	<script src="digit.js"></script>
+	<script src="countdown.js"></script>
+</body>
+</html>
